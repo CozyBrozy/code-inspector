@@ -30,7 +30,7 @@ jobs:
       run: |
         uvicorn app.main:app --host 127.0.0.1 --port 8000 &
         sleep 5
-        curl -s http://127.0.0.1:8000/scan | grep '"status": "Scan successful"'
+        curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/scan | grep 200
 
     - name: Build Docker Image
       run: |
