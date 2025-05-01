@@ -1,2 +1,5 @@
-fastapi
-uvicorn
+fastapi~=0.115.12
+uvicorn[standard]
+SQLAlchemy~=2.0.40
+python-dotenv~=1.1.0
+mysql-connector-python

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="Maxi">
+        <preConditions onFail="MARK_RAN">
+             <not>
+                 <tableExists tableName="food_entries"/>
+             </not>
+        </preConditions>
+
+        <comment>Erstellt die initiale Tabelle für Ernährungstagebuch-Einträge.</comment>
+
+        <createTable tableName="food_entries" remarks="Tabelle für Ernährungstagebuch-Einträge">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="meal_description" type="VARCHAR(255)" remarks="Beschreibung der Mahlzeit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calories" type="INT" remarks="Kalorien in kcal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbohydrates" type="FLOAT" remarks="Kohlenhydrate in Gramm">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protein" type="FLOAT" remarks="Protein in Gramm">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fat" type="FLOAT" remarks="Fett in Gramm">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)" defaultValueComputed="CURRENT_TIMESTAMP(6)" remarks="Zeitstempel der Erstellung (DB-seitig)">
+                 <constraints nullable="false"/>
+            </column>
+            <column name="meal_time" type="TIMESTAMP(6)" remarks="Zeitstempel der Mahlzeit (App-seitig, sollte UTC sein)">
+                 <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx_food_entries_meal_description" tableName="food_entries">
+            <column name="meal_description"/>
+        </createIndex>
+     </changeSet>
+
+</databaseChangeLog>
