@@ -51,6 +51,10 @@ coverage.xml
 .pytest_cache/
 cover/
 
+# webapp/.gitignore
+node_modules/
+.next/
+
 # Translations
 *.mo
 *.pot
