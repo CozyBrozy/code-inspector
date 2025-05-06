@@ -1,4 +1,16 @@
 services:
+  frontend:
+    build:
+      context: ./app/frontend
+      dockerfile: Dockerfile
+    container_name: ci-frontend
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
   backend:
     build:
       context: ./app/backend        # ① auf den Ordner mit main.py

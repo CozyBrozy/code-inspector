@@ -22,7 +22,7 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const numericFields = ['calories', 'carbohydrates', 'protein', 'fat'];
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: numericFields.includes(name) ? parseFloat(value) || 0 : value
@@ -35,7 +35,7 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
     setError(null);
 
     try {
-      const response = await fetch('/api/entries', {
+      const response = await fetch('http://localhost:8000/entries/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
       // Callback to refresh the list
       if (onSuccess) onSuccess();
     } catch (err) {
-      setError('Fehler beim Erstellen des Eintrags: ' + 
+      setError('Fehler beim Erstellen des Eintrags: ' +
                (err instanceof Error ? err.message : String(err)));
     } finally {
       setIsSubmitting(false);
@@ -72,13 +72,13 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
       <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
         Neuer Eintrag
       </h2>
-      
+
       {error && (
         <div className="mb-4 p-2 bg-red-100 text-red-700 rounded-md">
           {error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -89,13 +89,13 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
             value={formData.meal_description}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                     shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                     shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                      focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             rows={2}
           />
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -109,12 +109,12 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
               required
               min={0}
               step="1"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                        focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Kohlenhydrate (g)
@@ -127,12 +127,12 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
               required
               min={0}
               step="0.1"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                        focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Protein (g)
@@ -145,12 +145,12 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
               required
               min={0}
               step="0.1"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                        focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Fett (g)
@@ -163,13 +163,13 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
               required
               min={0}
               step="0.1"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                       shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                        focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Zeitpunkt
@@ -180,12 +180,12 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
             value={formData.meal_time}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
-                     shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                     shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500
                      focus:border-blue-500 dark:bg-gray-700 dark:text-white"
           />
         </div>
-        
+
         <div>
           <button
             type="submit"
@@ -201,4 +201,4 @@ export default function EntryForm({ onSuccess }: EntryFormProps) {
       </form>
     </div>
   );
-} 
+}

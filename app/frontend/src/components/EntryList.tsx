@@ -11,7 +11,7 @@ export default function EntryList() {
   const fetchEntries = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/entries');
+      const response = await fetch('http://localhost:8000/entries/');
       if (!response.ok) {
         throw new Error('Failed to fetch entries');
       }
@@ -49,24 +49,24 @@ export default function EntryList() {
       ) : (
         <div className="space-y-4">
           {entries.map((entry) => (
-            <div 
-              key={entry.id} 
+            <div
+              key={entry.id}
               className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm"
             >
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{entry.meal_description}</h3>
               <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                 <div className="text-gray-600 dark:text-gray-400">Kalorien:</div>
                 <div className="text-gray-800 dark:text-gray-200 font-medium">{entry.calories} kcal</div>
-                
+
                 <div className="text-gray-600 dark:text-gray-400">Kohlenhydrate:</div>
                 <div className="text-gray-800 dark:text-gray-200 font-medium">{entry.carbohydrates} g</div>
-                
+
                 <div className="text-gray-600 dark:text-gray-400">Proteine:</div>
                 <div className="text-gray-800 dark:text-gray-200 font-medium">{entry.protein} g</div>
-                
+
                 <div className="text-gray-600 dark:text-gray-400">Fett:</div>
                 <div className="text-gray-800 dark:text-gray-200 font-medium">{entry.fat} g</div>
-                
+
                 <div className="text-gray-600 dark:text-gray-400">Zeitpunkt:</div>
                 <div className="text-gray-800 dark:text-gray-200 font-medium">{formatDate(entry.meal_time)}</div>
               </div>
@@ -76,4 +76,4 @@ export default function EntryList() {
       )}
     </div>
   );
-} 
+}
